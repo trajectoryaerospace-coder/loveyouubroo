@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Surprise For You ❤️</title>
     
     <!-- Tailwind CSS -->
@@ -50,22 +49,40 @@
         * {
             user-select: none;
             -webkit-user-select: none;
-            touch-action: none; /* Prevent scrolling during drag */
             box-sizing: border-box;
         }
+        /* Reset browser margins and use the real mobile viewport, including safe areas. */
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            min-width: 100%;
+            height: 100%;
+            min-height: 100%;
+            background: #FFF0F5;
+        }
         body {
+            position: fixed !important;
+            inset: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            height: 100dvh !important;
+            min-height: 100svh;
+            max-width: 100vw;
             overflow: hidden;
             font-family: 'Quicksand', sans-serif;
             color: #C2185B;
         }
-        /* Landscape warning for portrait mode */
+        /* The app works in portrait and landscape; never cover the page with a rotate warning. */
         #orientation-warning {
-            display: none;
+            display: none !important;
         }
-        @media screen and (orientation: portrait) {
-            #orientation-warning {
-                display: flex !important;
-            }
+        #gauge-svg, #needle-hitbox {
+            touch-action: none;
+        }
+        .custom-scrollbar {
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-y;
         }
         /* Ambient Background Animations */
         @keyframes float-ambient {
@@ -136,17 +153,74 @@
         .section-hidden {
             opacity: 0;
             pointer-events: none;
-            transform: scale(0.95);
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            transform: scale(0.995);
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            max-width: 100vw;
+            overflow: hidden;
         }
         .section-active {
             opacity: 1;
             pointer-events: auto;
             transform: scale(1);
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            max-width: 100vw;
+            overflow: hidden;
             z-index: 40;
+        }
+        /* Fill edge-to-edge while keeping controls clear of notches and home indicators. */
+        #screen-1 {
+            padding-top: max(0.35rem, env(safe-area-inset-top)) !important;
+            padding-right: max(0.75rem, env(safe-area-inset-right)) !important;
+            padding-bottom: max(0.35rem, env(safe-area-inset-bottom)) !important;
+            padding-left: max(0.75rem, env(safe-area-inset-left)) !important;
+        }
+        #screen-2, #gift-1, #gift-2, #gift-3 {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        /* Small-height landscape phones: tighten the love-test layout so the gauge stays visible. */
+        @media (orientation: landscape) and (max-height: 500px) {
+            #screen-1 { justify-content: space-evenly !important; gap: 0 !important; }
+            #screen-1 > div:first-child { margin-top: 0 !important; flex-shrink: 0; }
+            #cat-avatar { width: clamp(3.25rem, 17vh, 5.25rem) !important; height: clamp(3.25rem, 17vh, 5.25rem) !important; }
+            #reaction-text { font-size: clamp(0.95rem, 4.1vh, 1.45rem) !important; line-height: 1.12 !important; margin-top: 0.15rem !important; min-height: 0 !important; }
+            #screen-1 > div:first-child > div.min-h-\[56px\] { min-height: clamp(2.25rem, 8vh, 3.5rem) !important; }
+            #gauge-container { width: min(72vw, 380px) !important; height: clamp(6.5rem, 31vh, 8.75rem) !important; margin: 0 !important; flex-shrink: 0; }
+            #screen-2 { padding-top: max(3.25rem, env(safe-area-inset-top)) !important; padding-bottom: 0.35rem !important; }
+            #screen-2 > .text-center { padding: 0.55rem 1rem !important; margin-top: 0 !important; }
+            #screen-2 h2 { font-size: clamp(1.2rem, 4.4vh, 1.7rem) !important; line-height: 1.1 !important; }
+            #screen-2 p { font-size: clamp(0.78rem, 3.2vh, 1rem) !important; }
+            #gift-box-container { margin-top: 0 !important; gap: 1.25rem !important; }
+            #gift-box-container > div > div { width: clamp(5.5rem, 15vh, 7.5rem) !important; height: clamp(5.5rem, 15vh, 7.5rem) !important; }
+        }
+        /* Portrait phones get compact sizing instead of a cropped landscape-only layout. */
+        @media (orientation: portrait) {
+            #screen-1 { justify-content: space-evenly !important; gap: 0 !important; }
+            #screen-1 > div:first-child { margin-top: 0 !important; width: 100%; flex-shrink: 0; }
+            #cat-avatar { width: clamp(4rem, 10vh, 6rem) !important; height: clamp(4rem, 10vh, 6rem) !important; }
+            #reaction-text { max-width: 95vw; font-size: clamp(1rem, 4.4vw, 1.45rem) !important; line-height: 1.12 !important; min-height: 0 !important; margin-top: 0.25rem !important; }
+            #screen-1 > div:first-child > div.min-h-\[56px\] { min-height: 2.75rem !important; }
+            #gauge-container { width: min(84vw, 380px) !important; height: clamp(7rem, 19vh, 9.5rem) !important; margin: 0 !important; flex-shrink: 0; }
+            #screen-2 { padding: max(3.6rem, env(safe-area-inset-top)) 0.5rem max(0.6rem, env(safe-area-inset-bottom)) !important; }
+            #screen-2 > .text-center { margin-top: 0 !important; padding: 0.7rem 0.8rem !important; max-width: 100%; }
+            #screen-2 h2 { font-size: clamp(1.25rem, 5.2vw, 1.65rem) !important; line-height: 1.12 !important; }
+            #screen-2 p { font-size: clamp(0.78rem, 3.3vw, 0.95rem) !important; line-height: 1.25 !important; }
+            #gift-box-container { gap: 0.15rem !important; margin-top: 0.25rem !important; }
+            #gift-box-container > div { min-width: 0; }
+            #gift-box-container > div > div { width: clamp(4.75rem, 27vw, 7rem) !important; height: clamp(4.75rem, 27vw, 7rem) !important; }
+            #gift-1 #bouquet-art { width: min(62vw, 300px) !important; height: auto !important; }
+            #gift-1 .bubble { max-width: 30vw; padding: 0.3rem 0.4rem; font-size: clamp(0.48rem, 2.25vw, 0.72rem); line-height: 1.15; border-width: 1px; }
+            #gift-1 .bubble-left { left: 0.2rem !important; }
+            #gift-1 .bubble-right { right: 0.2rem !important; }
+            #gift-3 .notebook-paper { padding-left: 3.4rem !important; padding-top: 1.4rem !important; }
+            #gift-3 .notebook-paper > div.text-gray-800 { font-size: clamp(0.9rem, 3.5vw, 1.15rem) !important; line-height: 1.65rem !important; padding-right: 0.8rem !important; }
         }
     </style>
 </head>
@@ -192,7 +266,7 @@
             </div>
         </div>
         <!-- Gauge Speedometer Section -->
-        <div class="relative w-[280px] md:w-[380px] h-[140px] flex justify-center items-end my-2 z-20">
+        <div id="gauge-container" class="relative w-[280px] md:w-[380px] h-[140px] flex justify-center items-end my-2 z-20">
             
             <!-- Tooltip for the needle -->
             <div id="drag-tooltip" class="absolute top-10 left-1/2 transform -translate-x-1/2 bg-white text-app-pink font-bold text-xs px-3 py-1 rounded-full shadow-soft animate-bounce pointer-events-none transition-opacity duration-300">
@@ -250,7 +324,7 @@
             </p>
         </div>
         <!-- Beautiful Gift Boxes Container -->
-        <div class="flex flex-1 items-center justify-center gap-8 md:gap-16 w-full max-w-3xl mt-4">
+        <div id="gift-box-container" class="flex flex-1 items-center justify-center gap-8 md:gap-16 w-full max-w-3xl mt-4">
             
             <!-- Gift 1: golden sunflower-inspired present -->
             <div onclick="showSection('gift-1')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){showSection('gift-1')}" aria-label="Open the sunflower bouquet gift" class="cursor-pointer group flex flex-col items-center transform transition-all hover:scale-110 active:scale-95 animate-float" style="animation-delay: 0s;">
@@ -320,7 +394,7 @@
         <div class="relative flex-1 flex items-center justify-center w-full px-4 pb-6 overflow-hidden">
             
             <!-- Beautiful Custom Sunflower SVG -->
-            <div class="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] z-10 animate-pulse-glow">
+            <div id="bouquet-art" class="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] z-10 animate-pulse-glow">
                 <svg class="w-full h-full drop-shadow-2xl" viewBox="0 0 200 240" fill="none">
                     <!-- Wrapper paper outline -->
                     <path d="M40 80 L90 220 L160 80 Q100 140 40 80 Z" fill="#FDFBF7" stroke="#E0E0E0" stroke-width="2"/>
