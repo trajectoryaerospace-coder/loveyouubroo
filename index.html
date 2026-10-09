@@ -27,9 +27,6 @@
                         'app-pink': '#E91E63',
                         'app-pink-dark': '#C2185B',
                         'app-pink-light': '#F8BBD0',
-                        'sunflower-yellow': '#FFD54F',
-                        'sunflower-dark': '#FFCA28',
-                        'sunflower-center': '#5D4037',
                     },
                     fontFamily: {
                         'main': ['Quicksand', 'sans-serif'],
@@ -50,7 +47,7 @@
         * {
             user-select: none;
             -webkit-user-select: none;
-            touch-action: none; /* Prevent scrolling during drag */
+            touch-action: none;
             box-sizing: border-box;
         }
 
@@ -60,7 +57,6 @@
             color: #C2185B;
         }
 
-        /* Landscape warning for portrait mode */
         #orientation-warning {
             display: none;
         }
@@ -70,7 +66,6 @@
             }
         }
 
-        /* Ambient Background Animations */
         @keyframes float-ambient {
             0%, 100% { transform: translate(0, 0) scale(1); }
             33% { transform: translate(30px, -50px) scale(1.1); }
@@ -92,13 +87,6 @@
         }
         .animate-pulse-glow { animation: pulse-glow 2s infinite; }
 
-        @keyframes pop-in {
-            0% { transform: scale(0.9); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .animate-pop { animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-
-        /* Speech bubbles for Sunflower Bouquet */
         .bubble {
             position: relative;
             background: rgba(255, 255, 255, 0.95);
@@ -121,7 +109,6 @@
             border-width: 8px 10px 8px 0; border-style: solid; border-color: transparent #FFE4E1 transparent transparent;
         }
 
-        /* Lined Notebook Paper Background for Letter */
         .notebook-paper {
             background-color: #fdfbf7;
             background-image: 
@@ -137,7 +124,6 @@
         .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.5); border-radius: 10px;}
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #F8BBD0; border-radius: 10px; }
 
-        /* Fullscreen Section Transitions */
         .fullscreen-section {
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
@@ -166,14 +152,12 @@
         <p class="text-lg text-pink-200">This romantic surprise is strictly designed for Mobile Landscape Mode!</p>
     </div>
 
-    <!-- Gorgeous Ambient Background Layers -->
+    <!-- Background Ambient Layers -->
     <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        <!-- Glowing Orbs -->
         <div class="absolute top-[-10%] left-[-10%] w-[50vh] h-[50vh] bg-pink-300 rounded-full mix-blend-multiply filter blur-[80px] opacity-40 bg-orb-1"></div>
         <div class="absolute bottom-[-10%] right-[-10%] w-[60vh] h-[60vh] bg-orange-200 rounded-full mix-blend-multiply filter blur-[80px] opacity-40 bg-orb-2"></div>
         <div class="absolute top-[20%] left-[40%] w-[40vh] h-[40vh] bg-rose-300 rounded-full mix-blend-multiply filter blur-[80px] opacity-30 bg-orb-3"></div>
         
-        <!-- Subtle Floating Hearts -->
         <div class="absolute top-1/4 left-1/4 text-app-pink-light text-2xl animate-float" style="animation-delay: 0s; opacity: 0.6;">🤍</div>
         <div class="absolute bottom-1/4 right-1/3 text-app-pink-light text-xl animate-float" style="animation-delay: 2s; opacity: 0.5;">✨</div>
         <div class="absolute top-1/3 right-1/4 text-white text-lg animate-float" style="animation-delay: 1s; opacity: 0.7;">🌸</div>
@@ -182,10 +166,7 @@
     <section id="screen-1" class="section-active flex flex-col items-center justify-between py-2 px-4">
         
         <div class="flex flex-col items-center justify-center mt-2 z-10">
-            <!-- Dynamic Cat Avatar Container -->
-            <div id="cat-avatar" class="w-24 h-24 relative flex items-center justify-center transition-all duration-300 drop-shadow-lg">
-                <!-- SVG injected via JS -->
-            </div>
+            <div id="cat-avatar" class="w-24 h-24 relative flex items-center justify-center transition-all duration-300 drop-shadow-lg"></div>
             
             <h1 id="reaction-text" class="text-2xl md:text-3xl font-serif italic font-bold text-app-pink-dark mt-2 h-10 flex items-center transition-all drop-shadow-sm">
                 Only that much?
@@ -196,10 +177,7 @@
             </div>
         </div>
 
-        <!-- Gauge Speedometer Section -->
         <div class="relative w-[280px] md:w-[380px] h-[140px] flex justify-center items-end my-2 z-20">
-            
-            <!-- Tooltip for the needle -->
             <div id="drag-tooltip" class="absolute top-10 left-1/2 transform -translate-x-1/2 bg-white text-app-pink font-bold text-xs px-3 py-1 rounded-full shadow-soft animate-bounce pointer-events-none transition-opacity duration-300">
                 Drag the needle! 👆
             </div>
@@ -216,29 +194,16 @@
                     </filter>
                 </defs>
                 
-                <!-- Background Arc -->
                 <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="24" stroke-linecap="round" filter="url(#shadow)"/>
-                
-                <!-- Colored Arc -->
                 <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gaugeGrad)" stroke-width="18" stroke-linecap="round"/>
-
-                <!-- Segment Dividers -->
                 <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#FFF" stroke-width="3" stroke-dasharray="1, 24.1" opacity="0.6"/>
 
-                <!-- Center Text -->
                 <text x="100" y="85" font-family="Caveat" font-size="32" fill="#C2185B" text-anchor="middle" font-weight="bold">love</text>
 
-                <!-- Needle Group (Draggable) -->
                 <g id="needle-group" transform="translate(100, 100) rotate(-90)" class="cursor-pointer">
-                    <!-- Invisible large hitbox for easier touch/grabbing -->
                     <circle id="needle-hitbox" cx="0" cy="-40" r="40" fill="transparent" class="touch-none cursor-grab active:cursor-grabbing"/>
-                    
-                    <!-- Beautiful Needle Design -->
                     <path d="M -5 0 L 5 0 L 1 -75 L -1 -75 Z" fill="#D81B60" filter="url(#shadow)"/>
-                    <!-- Needle Inner Highlight -->
                     <path d="M -1 0 L 1 0 L 0 -72 Z" fill="#FF80AB"/>
-                    
-                    <!-- Needle Base -->
                     <circle cx="0" cy="0" r="10" fill="#FFF" filter="url(#shadow)"/>
                     <circle cx="0" cy="0" r="6" fill="#E91E63"/>
                     <circle cx="0" cy="0" r="2" fill="#FFF"/>
@@ -246,131 +211,129 @@
             </svg>
         </div>
 
-        <!-- Next Button -->
         <button id="next-btn-screen1" onclick="showSection('screen-2')" class="absolute bottom-6 right-8 hidden opacity-0 transform translate-x-4 transition-all duration-700 bg-gradient-to-r from-app-pink to-app-pink-dark text-white font-bold px-8 py-3 rounded-full shadow-glow border-2 border-white hover:scale-105 active:scale-95 flex items-center gap-2 z-30 text-lg">
             <span>Next</span>
             <i class="fa-solid fa-arrow-right"></i>
         </button>
     </section>
 
-    <section id="screen-2" class="section-hidden flex flex-col items-center justify-start py-6 px-6 z-20">
+    <!-- SCREEN 2: Gift Selection with Custom Creative Boxes & No Text Underneath -->
+    <section id="screen-2" class="section-hidden flex flex-col items-center justify-start py-6 px-6 z-20 relative">
         
+        <!-- Back Button Added Here -->
+        <div class="absolute top-4 left-6 z-50">
+            <button onclick="showSection('screen-1')" class="text-app-pink-dark hover:text-app-pink text-sm md:text-base font-bold flex items-center gap-2 bg-white/80 backdrop-blur px-4 py-2 rounded-full shadow-sm hover:shadow-md transition-all">
+                <i class="fa-solid fa-chevron-left"></i> Back
+            </button>
+        </div>
+
         <div class="text-center mt-2 bg-white/40 backdrop-blur-sm px-8 py-4 rounded-3xl shadow-sm border border-white/60">
             <h2 class="text-2xl md:text-3xl font-serif italic font-extrabold text-app-pink-dark tracking-wide drop-shadow-sm">
-                You passed the love test
+                HEYWOOO MY LOVERRRR
             </h2>
             <p class="text-base md:text-lg font-bold text-app-pink mt-1 opacity-90 font-main">
-                Your surprises are waiting for you 🎁
+                oOoOoO u is pass da testt now go for de gifts
             </p>
         </div>
 
-        <!-- Beautiful Gift Boxes Container -->
-        <div class="flex flex-1 items-center justify-center gap-8 md:gap-16 w-full max-w-3xl mt-4">
+        <!-- Distinct, Creative Gift Boxes Container (No text under them) -->
+        <div class="flex flex-1 items-center justify-center gap-6 md:gap-14 w-full max-w-3xl mt-4">
             
-            <!-- Box 1 (Sunflowers) -->
+            <!-- Gift 1: Hexagonal Pink Gift Box with Heart Tag -->
             <div onclick="showSection('gift-1')" class="cursor-pointer group flex flex-col items-center transform transition-all hover:scale-110 active:scale-95 animate-float" style="animation-delay: 0s;">
-                <div class="w-28 h-28 md:w-36 md:h-36 relative">
+                <div class="w-32 h-32 md:w-40 md:h-40 relative">
                     <svg class="w-full h-full drop-shadow-2xl" viewBox="0 0 100 100">
-                        <!-- Box Body -->
-                        <rect x="15" y="45" width="70" height="50" rx="6" fill="#64B5F6"/>
-                        <rect x="15" y="45" width="35" height="50" rx="6" fill="#42A5F5"/> <!-- Shading -->
-                        <!-- Box Lid -->
-                        <rect x="10" y="32" width="80" height="18" rx="4" fill="#90CAF9"/>
-                        <rect x="10" y="32" width="40" height="18" rx="4" fill="#64B5F6"/> <!-- Shading -->
-                        <!-- Ribbons -->
-                        <rect x="42" y="32" width="16" height="63" fill="#F48FB1"/>
-                        <rect x="10" y="40" width="80" height="6" fill="#F48FB1"/>
-                        <!-- Intricate Bow -->
-                        <path d="M 40 32 C 20 10, 5 30, 42 35 Z" fill="#E91E63"/>
-                        <path d="M 60 32 C 80 10, 95 30, 58 35 Z" fill="#D81B60"/>
-                        <circle cx="50" cy="34" r="6" fill="#C2185B"/>
+                        <!-- Hexagon Box Body -->
+                        <polygon points="30,45 70,45 85,75 50,95 15,75" fill="#FF80AB"/>
+                        <polygon points="50,45 70,45 85,75 50,95" fill="#FF4081"/>
+                        <!-- Lid -->
+                        <polygon points="25,38 75,38 82,48 18,48" fill="#F48FB1"/>
+                        <polygon points="50,38 75,38 82,48 50,48" fill="#E91E63"/>
+                        <!-- Ribbon Cross -->
+                        <rect x="46" y="38" width="8" height="57" fill="#FFF"/>
+                        <rect x="18" y="42" width="64" height="6" fill="#FFF"/>
+                        <!-- Cute Bow -->
+                        <path d="M 40 38 C 25 20, 10 30, 42 36 Z" fill="#C2185B"/>
+                        <path d="M 60 38 C 75 20, 90 30, 58 36 Z" fill="#880E4F"/>
+                        <circle cx="50" cy="38" r="5" fill="#FFEB3B"/>
                     </svg>
                 </div>
-                <div class="mt-2 text-app-pink-dark font-bold font-main bg-white/60 px-3 py-1 rounded-full shadow-sm text-sm">Open Me</div>
             </div>
 
-            <!-- Box 2 (Memories) -->
+            <!-- Gift 2: Striped Gift Box with Star topper -->
             <div onclick="showSection('gift-2')" class="cursor-pointer group flex flex-col items-center transform transition-all hover:scale-110 active:scale-95 animate-float" style="animation-delay: 0.2s;">
-                <div class="w-28 h-28 md:w-36 md:h-36 relative">
+                <div class="w-32 h-32 md:w-40 md:h-40 relative">
                     <svg class="w-full h-full drop-shadow-2xl" viewBox="0 0 100 100">
-                        <rect x="15" y="45" width="70" height="50" rx="6" fill="#64B5F6"/>
-                        <rect x="15" y="45" width="35" height="50" rx="6" fill="#42A5F5"/>
-                        <rect x="10" y="32" width="80" height="18" rx="4" fill="#90CAF9"/>
-                        <rect x="10" y="32" width="40" height="18" rx="4" fill="#64B5F6"/>
-                        <rect x="42" y="32" width="16" height="63" fill="#F48FB1"/>
-                        <rect x="10" y="40" width="80" height="6" fill="#F48FB1"/>
-                        <path d="M 40 32 C 20 10, 5 30, 42 35 Z" fill="#E91E63"/>
-                        <path d="M 60 32 C 80 10, 95 30, 58 35 Z" fill="#D81B60"/>
-                        <circle cx="50" cy="34" r="6" fill="#C2185B"/>
+                        <!-- Box Body with Stripes -->
+                        <rect x="20" y="45" width="60" height="45" rx="4" fill="#AB47BC"/>
+                        <rect x="35" y="45" width="10" height="45" fill="#CE93D8"/>
+                        <rect x="55" y="45" width="10" height="45" fill="#CE93D8"/>
+                        <!-- Lid -->
+                        <rect x="16" y="32" width="68" height="15" rx="3" fill="#BA68C8"/>
+                        <rect x="46" y="32" width="8" height="58" fill="#FFD54F"/>
+                        <rect x="16" y="38" width="68" height="5" fill="#FFD54F"/>
+                        <!-- Star Ribbon Top -->
+                        <polygon points="50,15 53,25 63,25 55,31 58,41 50,35 42,41 45,31 37,25 47,25" fill="#FFD54F" filter="url(#shadow)"/>
                     </svg>
                 </div>
-                <div class="mt-2 text-app-pink-dark font-bold font-main bg-white/60 px-3 py-1 rounded-full shadow-sm text-sm">For You</div>
             </div>
 
-            <!-- Box 3 (Letter) -->
+            <!-- Gift 3: Round Cylindrical Gift Box with Heart Pattern -->
             <div onclick="showSection('gift-3')" class="cursor-pointer group flex flex-col items-center transform transition-all hover:scale-110 active:scale-95 animate-float" style="animation-delay: 0.4s;">
-                <div class="w-28 h-28 md:w-36 md:h-36 relative">
+                <div class="w-32 h-32 md:w-40 md:h-40 relative">
                     <svg class="w-full h-full drop-shadow-2xl" viewBox="0 0 100 100">
-                        <rect x="15" y="45" width="70" height="50" rx="6" fill="#64B5F6"/>
-                        <rect x="15" y="45" width="35" height="50" rx="6" fill="#42A5F5"/>
-                        <rect x="10" y="32" width="80" height="18" rx="4" fill="#90CAF9"/>
-                        <rect x="10" y="32" width="40" height="18" rx="4" fill="#64B5F6"/>
-                        <rect x="42" y="32" width="16" height="63" fill="#F48FB1"/>
-                        <rect x="10" y="40" width="80" height="6" fill="#F48FB1"/>
-                        <path d="M 40 32 C 20 10, 5 30, 42 35 Z" fill="#E91E63"/>
-                        <path d="M 60 32 C 80 10, 95 30, 58 35 Z" fill="#D81B60"/>
-                        <circle cx="50" cy="34" r="6" fill="#C2185B"/>
+                        <!-- Cylindrical Cylinder Body -->
+                        <path d="M 20 50 Q 50 40 80 50 L 80 85 Q 50 95 20 85 Z" fill="#26A69A"/>
+                        <path d="M 20 50 Q 50 60 80 50 L 80 85 Q 50 95 20 85 Z" fill="#00897B"/>
+                        <!-- Top Lid Ellipse -->
+                        <ellipse cx="50" cy="50" rx="30" ry="10" fill="#4DB6AC"/>
+                        <ellipse cx="50" cy="48" rx="25" ry="7" fill="#80CBC4"/>
+                        <!-- Vertical Ribbon & Bow -->
+                        <rect x="46" y="48" width="8" height="40" fill="#FF7043"/>
+                        <path d="M 40 43 C 25 25, 10 35, 45 47 Z" fill="#F4511E"/>
+                        <path d="M 60 43 C 75 25, 90 35, 55 47 Z" fill="#D84315"/>
+                        <circle cx="50" cy="45" r="5" fill="#FFAB91"/>
                     </svg>
                 </div>
-                <div class="mt-2 text-app-pink-dark font-bold font-main bg-white/60 px-3 py-1 rounded-full shadow-sm text-sm">Read Me</div>
             </div>
 
         </div>
     </section>
 
+    <!-- GIFT 1: Sunflowers -->
     <section id="gift-1" class="section-hidden bg-gradient-to-br from-app-bg-1 to-app-bg-3 flex flex-col">
         <div class="w-full p-4 flex justify-between items-center z-50">
             <button onclick="showSection('screen-2')" class="text-app-pink-dark hover:text-app-pink text-lg font-bold flex items-center gap-2 bg-white/80 backdrop-blur px-5 py-2 rounded-full shadow-sm hover:shadow-md transition-all">
                 <i class="fa-solid fa-chevron-left"></i> Back
             </button>
             <h2 class="text-2xl font-serif font-extrabold text-app-pink-dark drop-shadow-sm">Your Bouquet</h2>
-            <div class="w-24"></div> <!-- Spacer for centering -->
+            <div class="w-24"></div>
         </div>
 
         <div class="relative flex-1 flex items-center justify-center w-full px-4 pb-6 overflow-hidden">
-            
-            <!-- Beautiful Custom Sunflower SVG -->
             <div class="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] z-10 animate-pulse-glow">
                 <svg class="w-full h-full drop-shadow-2xl" viewBox="0 0 200 240" fill="none">
-                    <!-- Wrapper paper outline -->
                     <path d="M40 80 L90 220 L160 80 Q100 140 40 80 Z" fill="#FDFBF7" stroke="#E0E0E0" stroke-width="2"/>
                     <path d="M30 100 L100 230 L170 100 Z" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="2"/>
-                    <!-- Wrapping paper fold details -->
                     <path d="M100 230 L70 120" stroke="#F5F5F5" stroke-width="2"/>
                     <path d="M100 230 L130 120" stroke="#F5F5F5" stroke-width="2"/>
                     
-                    <!-- Elegant Pink Ribbon -->
                     <path d="M60 170 Q100 190 140 170 Q120 215 150 230" stroke="#E91E63" stroke-width="7" fill="none" stroke-linecap="round"/>
                     <path d="M140 170 Q100 190 60 170 Q80 215 50 230" stroke="#E91E63" stroke-width="7" fill="none" stroke-linecap="round"/>
-                    <!-- Bow center -->
                     <circle cx="100" cy="177" r="10" fill="#C2185B"/>
                     <path d="M 100 177 C 80 150, 60 160, 95 180 Z" fill="#F48FB1"/>
                     <path d="M 100 177 C 120 150, 140 160, 105 180 Z" fill="#F48FB1"/>
 
-                    <!-- Green Stems & Leaves -->
                     <g stroke="#81C784" stroke-width="4" stroke-linecap="round">
                         <line x1="100" y1="120" x2="100" y2="180"/>
                         <line x1="75" y1="110" x2="90" y2="175"/>
                         <line x1="125" y1="110" x2="110" y2="175"/>
-                        <!-- Leaves -->
                         <path d="M100 140 Q 120 130 115 150 Q 100 145 100 140" fill="#A5D6A7" stroke="none"/>
                         <path d="M95 150 Q 75 140 80 160 Q 95 155 95 150" fill="#A5D6A7" stroke="none"/>
                     </g>
 
-                    <!-- DEFINING A SUNFLOWER TO REUSE -->
                     <defs>
                         <g id="sunflower">
-                            <!-- Petals (Yellow) -->
                             <g fill="#FFD54F" stroke="#FFCA28" stroke-width="1">
                                 <ellipse cx="0" cy="-22" rx="6" ry="18" />
                                 <ellipse cx="0" cy="-22" rx="6" ry="18" transform="rotate(30)" />
@@ -385,30 +348,10 @@
                                 <ellipse cx="0" cy="-22" rx="6" ry="18" transform="rotate(300)" />
                                 <ellipse cx="0" cy="-22" rx="6" ry="18" transform="rotate(330)" />
                             </g>
-                            <!-- Inner darker petals -->
-                            <g fill="#FFCA28">
-                                <ellipse cx="0" cy="-15" rx="4" ry="12" transform="rotate(15)" />
-                                <ellipse cx="0" cy="-15" rx="4" ry="12" transform="rotate(45)" />
-                                <ellipse cx="0" cy="-15" rx="4" ry="12" transform="rotate(75)" />
-                                <ellipse cx="0" cy="-15" rx="4" ry="12" transform="rotate(105)" />
-                                <ellipse cx="0" cy="-15" rx="4" ry="12" transform="rotate(135)" />
-                                <ellipse cx="0" cy="-15" rx="4" ry="12" transform="rotate(165)" />
-                                <ellipse cx="0" cy="-15" rx="4" ry="12" transform="rotate(195)" />
-                                <ellipse cx="0" cy="-15" rx="4" ry="12" transform="rotate(225)" />
-                                <ellipse cx="0" cy="-15" rx="4" ry="12" transform="rotate(255)" />
-                                <ellipse cx="0" cy="-15" rx="4" ry="12" transform="rotate(285)" />
-                                <ellipse cx="0" cy="-15" rx="4" ry="12" transform="rotate(315)" />
-                                <ellipse cx="0" cy="-15" rx="4" ry="12" transform="rotate(345)" />
-                            </g>
-                            <!-- Brown Center -->
                             <circle cx="0" cy="0" r="14" fill="#5D4037" />
-                            <!-- Center texture dots -->
-                            <circle cx="0" cy="0" r="10" fill="#4E342E" stroke="#3E2723" stroke-dasharray="2,2" stroke-width="2"/>
-                            <circle cx="0" cy="0" r="5" fill="#3E2723" stroke="#212121" stroke-dasharray="1,2" stroke-width="1.5"/>
                         </g>
                     </defs>
 
-                    <!-- Positioning the Sunflowers in the Bouquet -->
                     <use href="#sunflower" x="100" y="55" transform="scale(1.2) translate(-15, -10)" />
                     <use href="#sunflower" x="65" y="85" />
                     <use href="#sunflower" x="135" y="85" />
@@ -417,24 +360,20 @@
                 </svg>
             </div>
 
-            <!-- Romantic Floating Bubbles -->
             <div class="absolute left-6 md:left-20 top-10 bottom-10 flex flex-col justify-around z-20">
                 <div class="bubble bubble-left transform -rotate-2 animate-float" style="animation-delay: 0.1s;">You make my heart bloom. 🌻</div>
                 <div class="bubble bubble-left transform rotate-3 animate-float" style="animation-delay: 0.5s;">Life feels sweeter with you 💕</div>
-                <div class="bubble bubble-left transform -rotate-1 animate-float" style="animation-delay: 1.2s;">You make every moment sweeter. ✨</div>
             </div>
 
             <div class="absolute right-6 md:right-20 top-10 bottom-10 flex flex-col justify-around z-20 text-right">
                 <div class="bubble bubble-right transform rotate-2 animate-float" style="animation-delay: 0.3s;">I choose you every day 💖</div>
-                <div class="bubble bubble-right transform -rotate-3 animate-float" style="animation-delay: 0.8s;">My love is growing... 🌱</div>
-                <div class="bubble bubble-right transform rotate-1 animate-float" style="animation-delay: 1.5s;">My heart will always choose you. 💓</div>
+                <div class="bubble bubble-right transform -rotate-3 animate-float" style="animation-delay: 0.8s;">My heart will always choose you. 💓</div>
             </div>
-
         </div>
     </section>
 
+    <!-- GIFT 2: Kiss Coupon, Romantic Ticket, and Hug Request -->
     <section id="gift-2" class="section-hidden bg-pink-50 flex flex-col overflow-hidden relative">
-        <!-- Abstract background elements for Memory lane -->
         <div class="absolute inset-0 opacity-40" style="background-image: radial-gradient(#F8BBD0 1px, transparent 1px); background-size: 20px 20px;"></div>
         
         <div class="w-full p-4 flex justify-between items-center z-50 relative">
@@ -445,47 +384,31 @@
             <div class="w-24"></div>
         </div>
 
-        <!-- Scrapbook Elements (Tickets) -->
+        <!-- Scrapbook Elements Updated as Requested -->
         <div class="absolute top-20 left-12 md:left-32 transform -rotate-12 z-10 border-2 border-amber-300 bg-amber-50 text-amber-800 font-mono font-bold px-4 py-2 rounded-md shadow-lg flex items-center gap-2 animate-float">
-            <i class="fa-solid fa-ticket"></i> LOVE PASS
+            <i class="fa-solid fa-ticket"></i> KISS COUPON
         </div>
         <div class="absolute bottom-20 right-12 md:right-32 transform rotate-12 z-10 border-2 border-pink-300 bg-pink-50 text-pink-800 font-mono font-bold px-4 py-2 rounded-md shadow-lg flex items-center gap-2 animate-float" style="animation-delay: 1s;">
-            <i class="fa-solid fa-heart"></i> ROMANCE TICKET
+            <i class="fa-solid fa-heart"></i> ROMANTIC TICKET
         </div>
-        <div class="absolute top-1/4 right-1/4 text-4xl animate-bounce z-10 opacity-80">🦋</div>
+        
+        <!-- Hug Request Notification Banner -->
+        <div class="absolute top-24 right-1/2 transform translate-x-1/2 z-30 bg-app-pink text-white font-bold px-6 py-2 rounded-full shadow-glow animate-bounce text-sm md:text-base border-2 border-white">
+            🤗 U MUST HUG ME RN PLS
+        </div>
 
-        <!-- Polaroid & Player -->
-        <div class="flex-1 flex flex-col items-center justify-center z-20 w-full px-4 pb-6">
-            
-            <!-- Beautiful Polaroid Frame -->
+        <div class="flex-1 flex flex-col items-center justify-center z-20 w-full px-4 pb-6 mt-8">
             <div class="bg-white p-4 pb-8 rounded-sm shadow-paper transform rotate-2 w-[300px] md:w-[380px] transition-transform hover:scale-105 duration-300">
-                
-                <!-- CSS Art Landscape -->
                 <div class="w-full h-40 md:h-48 bg-gradient-to-b from-blue-300 via-blue-200 to-green-200 overflow-hidden relative border border-gray-100 shadow-inner rounded-sm">
-                    <!-- Glowing Sun -->
                     <div class="absolute top-4 right-6 w-12 h-12 bg-yellow-200 rounded-full opacity-90 shadow-[0_0_30px_#fef08a] animate-pulse"></div>
-                    <!-- Clouds -->
                     <div class="absolute top-8 left-4 w-16 h-5 bg-white rounded-full opacity-90 blur-[1px]"></div>
-                    <div class="absolute top-6 left-10 w-10 h-6 bg-white rounded-full opacity-90 blur-[1px]"></div>
-                    
-                    <div class="absolute top-12 right-1/2 w-20 h-6 bg-white rounded-full opacity-80 blur-[2px]"></div>
-                    <!-- Rolling Green Hills -->
-                    <div class="absolute -bottom-8 -left-8 w-48 h-24 bg-green-400 rounded-[50%] shadow-[inset_0_5px_10px_rgba(0,0,0,0.1)]"></div>
-                    <div class="absolute -bottom-10 right-0 w-56 h-28 bg-green-500 rounded-[50%] shadow-[inset_0_5px_10px_rgba(0,0,0,0.1)]"></div>
-                    <div class="absolute -bottom-4 left-1/4 w-32 h-16 bg-green-300 rounded-[50%]"></div>
-                    
-                    <!-- White Birds (SVG) -->
-                    <svg class="absolute top-10 left-12 w-6 h-6 text-white drop-shadow-md" viewBox="0 0 24 24" fill="currentColor"><path d="M22,12 c-2.4-1.5-4.7-2.3-7.5-1.5 c-0.6,0.2-1.3,0.3-2,0.3 c-0.7,0-1.4-0.1-2-0.3 c-2.8-0.8-5.1,0-7.5,1.5 c-0.4,0.3-1,0.2-1.3-0.2 c-0.3-0.4-0.2-1,0.2-1.3 c2.8-1.8,5.6-2.8,8.9-1.9 c0.5,0.1,1.1,0.2,1.6,0.2 c0.6,0,1.1-0.1,1.6-0.2 c3.3-0.9,6.2,0,8.9,1.9 c0.4,0.3,0.5,0.9,0.2,1.3 C22.8,12.1,22.4,12.2,22,12 z"/></svg>
-                    <svg class="absolute top-6 left-24 w-4 h-4 text-white drop-shadow-md" viewBox="0 0 24 24" fill="currentColor"><path d="M22,12 c-2.4-1.5-4.7-2.3-7.5-1.5 c-0.6,0.2-1.3,0.3-2,0.3 c-0.7,0-1.4-0.1-2-0.3 c-2.8-0.8-5.1,0-7.5,1.5 c-0.4,0.3-1,0.2-1.3-0.2 c-0.3-0.4-0.2-1,0.2-1.3 c2.8-1.8,5.6-2.8,8.9-1.9 c0.5,0.1,1.1,0.2,1.6,0.2 c0.6,0,1.1-0.1,1.6-0.2 c3.3-0.9,6.2,0,8.9,1.9 c0.4,0.3,0.5,0.9,0.2,1.3 C22.8,12.1,22.4,12.2,22,12 z"/></svg>
+                    <div class="absolute -bottom-8 -left-8 w-48 h-24 bg-green-400 rounded-[50%]"></div>
+                    <div class="absolute -bottom-10 right-0 w-56 h-28 bg-green-500 rounded-[50%]"></div>
                 </div>
                 
-                <!-- Music Player Widget -->
                 <div class="w-full bg-[#FAFAFA] border border-gray-200 rounded-2xl mt-5 p-3 flex items-center justify-between shadow-md">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 rounded-xl bg-gradient-to-tr from-gray-700 to-gray-900 flex items-center justify-center shadow-lg relative overflow-hidden">
-                            <!-- Subtle vinyl record look -->
-                            <div class="absolute inset-0 rounded-xl border border-gray-600 m-1"></div>
-                            <div class="absolute inset-0 rounded-xl border border-gray-500 m-2"></div>
                             <i class="fa-solid fa-music text-white text-xl z-10"></i>
                         </div>
                         <div class="text-left">
@@ -494,19 +417,17 @@
                         </div>
                     </div>
 
-                    <!-- Controls -->
                     <div class="flex items-center gap-4 text-gray-600 mr-2">
-                        <button class="hover:text-app-pink text-sm transition-colors"><i class="fa-solid fa-backward-step"></i></button>
                         <button id="play-btn" onclick="toggleAudio()" class="w-10 h-10 rounded-full bg-app-pink text-white flex items-center justify-center text-sm shadow-glow hover:scale-110 active:scale-95 transition-all">
                             <i id="play-icon" class="fa-solid fa-play ml-0.5"></i>
                         </button>
-                        <button class="hover:text-app-pink text-sm transition-colors"><i class="fa-solid fa-forward-step"></i></button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- GIFT 3: Letter -->
     <section id="gift-3" class="section-hidden bg-gradient-to-bl from-app-bg-1 to-pink-100 flex flex-col">
         <div class="w-full p-4 flex justify-between items-center z-50">
             <button onclick="showSection('screen-2')" class="text-app-pink-dark hover:text-app-pink text-lg font-bold flex items-center gap-2 bg-white/80 backdrop-blur px-5 py-2 rounded-full shadow-sm hover:shadow-md transition-all">
@@ -517,14 +438,9 @@
         </div>
 
         <div class="relative flex-1 w-full px-6 pb-6 pt-2 overflow-hidden flex justify-center">
-            
-            <!-- Notebook Paper Container -->
             <div class="relative w-full max-w-4xl h-full rounded-2xl shadow-paper overflow-hidden notebook-paper custom-scrollbar overflow-y-auto">
-                
-                <!-- Vertical Red Margin Line -->
                 <div class="absolute top-0 bottom-0 left-[60px] w-0.5 bg-red-400 opacity-50"></div>
 
-                <!-- Letter Text -->
                 <div class="text-gray-800 font-main font-semibold text-lg md:text-xl leading-[32px] pr-6 md:pr-12 relative z-10 pb-24 pt-2">
                     You make my life feel more beautiful and meaningful, and I feel so lucky to have you. I love you wholeheartedly, and I can't wait to continue loving you for the rest of my life.
                     <br><br>
@@ -536,127 +452,15 @@
                         Always, forever. 💕
                     </div>
                 </div>
-
-                <!-- Cute Cat Hugging Heart SVG in Bottom Corner -->
-                <div class="absolute bottom-4 left-6 md:left-12 w-24 h-24 z-20">
-                    <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-md">
-                        <!-- Cat Head & Body Base -->
-                        <path d="M20 80 Q 20 40 50 40 Q 80 40 80 80 Z" fill="#FFFFFF"/>
-                        <!-- Ears -->
-                        <polygon points="20,50 15,20 40,42" fill="#FFFFFF" stroke="#F48FB1" stroke-width="2"/>
-                        <polygon points="80,50 85,20 60,42" fill="#FFFFFF" stroke="#F48FB1" stroke-width="2"/>
-                        <!-- Ear inners -->
-                        <polygon points="22,46 19,26 35,41" fill="#F8BBD0"/>
-                        <polygon points="78,46 81,26 65,41" fill="#F8BBD0"/>
-                        <!-- Huge Heart being hugged -->
-                        <path d="M 50 55 C 30 35, 10 60, 50 85 C 90 60, 70 35, 50 55 Z" fill="#E91E63" class="animate-pulse-glow"/>
-                        <!-- Paws wrapping heart -->
-                        <circle cx="35" cy="65" r="7" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
-                        <circle cx="65" cy="65" r="7" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
-                        <!-- Happy closed eyes on cat -->
-                        <path d="M 35 48 Q 40 45 45 48" fill="none" stroke="#C2185B" stroke-width="3" stroke-linecap="round"/>
-                        <path d="M 55 48 Q 60 45 65 48" fill="none" stroke="#C2185B" stroke-width="3" stroke-linecap="round"/>
-                        <!-- Little nose -->
-                        <circle cx="50" cy="52" r="2" fill="#F48FB1"/>
-                    </svg>
-                </div>
             </div>
-
-            <!-- Decorative Overlays outside notebook -->
-            <div class="absolute top-10 right-4 md:right-10 z-20 text-4xl opacity-90 drop-shadow-sm animate-float">
-                🌸🌿
-            </div>
-
         </div>
     </section>
 
     <script>
-        // High-Quality Custom Cat SVGs
         const cats = {
-            crying: `<svg class="w-full h-full" viewBox="0 0 100 100">
-                <!-- Head -->
-                <ellipse cx="50" cy="55" rx="45" ry="38" fill="#FFF" stroke="#E91E63" stroke-width="3"/>
-                <!-- Ears -->
-                <polygon points="12,35 15,5 38,25" fill="#FFF" stroke="#E91E63" stroke-width="3" stroke-linejoin="round"/>
-                <polygon points="88,35 85,5 62,25" fill="#FFF" stroke="#E91E63" stroke-width="3" stroke-linejoin="round"/>
-                <!-- Ear inners -->
-                <polygon points="16,30 19,12 33,25" fill="#F8BBD0"/>
-                <polygon points="84,30 81,12 67,25" fill="#F8BBD0"/>
-                <!-- Mask stroke overlap -->
-                <ellipse cx="50" cy="55" rx="45" ry="38" fill="#FFF" stroke="none"/>
-                
-                <!-- Huge Watery Sad Eyes -->
-                <ellipse cx="32" cy="55" rx="9" ry="12" fill="#C2185B"/>
-                <circle cx="34" cy="50" r="4" fill="#FFF"/>
-                <circle cx="28" cy="58" r="2" fill="#FFF"/>
-                
-                <ellipse cx="68" cy="55" rx="9" ry="12" fill="#C2185B"/>
-                <circle cx="66" cy="50" r="4" fill="#FFF"/>
-                <circle cx="72" cy="58" r="2" fill="#FFF"/>
-                
-                <!-- Tears streaming -->
-                <path d="M 32 68 Q 30 80 32 85 Q 35 80 32 68" fill="#81D4FA" class="animate-pulse"/>
-                <path d="M 68 68 Q 66 80 68 85 Q 71 80 68 68" fill="#81D4FA" class="animate-pulse"/>
-
-                <!-- Sad wobbly mouth -->
-                <path d="M 45 72 Q 50 68 55 72" fill="none" stroke="#C2185B" stroke-width="3" stroke-linecap="round"/>
-                
-                <!-- Tiny cute paws clutching face -->
-                <ellipse cx="20" cy="70" rx="8" ry="6" fill="#FFF" stroke="#E91E63" stroke-width="2" transform="rotate(20 20 70)"/>
-                <ellipse cx="80" cy="70" rx="8" ry="6" fill="#FFF" stroke="#E91E63" stroke-width="2" transform="rotate(-20 80 70)"/>
-            </svg>`,
-            
-            unimpressed: `<svg class="w-full h-full" viewBox="0 0 100 100">
-                <!-- Head -->
-                <ellipse cx="50" cy="55" rx="45" ry="38" fill="#FFF" stroke="#E91E63" stroke-width="3"/>
-                <!-- Ears -->
-                <polygon points="12,35 15,5 38,25" fill="#FFF" stroke="#E91E63" stroke-width="3" stroke-linejoin="round"/>
-                <polygon points="88,35 85,5 62,25" fill="#FFF" stroke="#E91E63" stroke-width="3" stroke-linejoin="round"/>
-                <!-- Ear inners -->
-                <polygon points="16,30 19,12 33,25" fill="#F8BBD0"/>
-                <polygon points="84,30 81,12 67,25" fill="#F8BBD0"/>
-                <ellipse cx="50" cy="55" rx="45" ry="38" fill="#FFF" stroke="none"/>
-                
-                <!-- Half closed bored eyes -->
-                <path d="M 22 55 Q 32 50 42 55" fill="none" stroke="#C2185B" stroke-width="4" stroke-linecap="round"/>
-                <line x1="25" y1="58" x2="39" y2="58" stroke="#C2185B" stroke-width="4" stroke-linecap="round"/>
-                
-                <path d="M 58 55 Q 68 50 78 55" fill="none" stroke="#C2185B" stroke-width="4" stroke-linecap="round"/>
-                <line x1="61" y1="58" x2="75" y2="58" stroke="#C2185B" stroke-width="4" stroke-linecap="round"/>
-
-                <!-- Flat straight mouth -->
-                <line x1="46" y1="72" x2="54" y2="72" stroke="#C2185B" stroke-width="3" stroke-linecap="round"/>
-                
-                <!-- Annoyed sweat drop -->
-                <path d="M 80 35 Q 85 45 80 50 Q 75 45 80 35" fill="#B3E5FC"/>
-            </svg>`,
-            
-            happy: `<svg class="w-full h-full" viewBox="0 0 100 100">
-                <!-- Head -->
-                <ellipse cx="50" cy="55" rx="45" ry="38" fill="#FFF" stroke="#E91E63" stroke-width="3"/>
-                <!-- Ears -->
-                <polygon points="12,35 15,5 38,25" fill="#FFF" stroke="#E91E63" stroke-width="3" stroke-linejoin="round"/>
-                <polygon points="88,35 85,5 62,25" fill="#FFF" stroke="#E91E63" stroke-width="3" stroke-linejoin="round"/>
-                <!-- Ear inners -->
-                <polygon points="16,30 19,12 33,25" fill="#F8BBD0"/>
-                <polygon points="84,30 81,12 67,25" fill="#F8BBD0"/>
-                <ellipse cx="50" cy="55" rx="45" ry="38" fill="#FFF" stroke="none"/>
-                
-                <!-- Happy Sparkly Eyes (Arches) -->
-                <path d="M 25 55 Q 32 42 39 55" fill="none" stroke="#C2185B" stroke-width="5" stroke-linecap="round"/>
-                <path d="M 61 55 Q 68 42 75 55" fill="none" stroke="#C2185B" stroke-width="5" stroke-linecap="round"/>
-                
-                <!-- Big Cheerful Open Mouth -->
-                <path d="M 40 68 Q 50 90 60 68 Z" fill="#E91E63" stroke="#C2185B" stroke-width="2" stroke-linejoin="round"/>
-                
-                <!-- Heavy cute blush -->
-                <ellipse cx="22" cy="65" rx="8" ry="4" fill="#F8BBD0"/>
-                <ellipse cx="78" cy="65" rx="8" ry="4" fill="#F8BBD0"/>
-                
-                <!-- Hearts popping out -->
-                <path d="M10 20 C10 10, 25 10, 20 30 C15 45, -5 30, 10 20 Z" fill="#E91E63" transform="scale(0.6) translate(-10, 0)" class="animate-bounce"/>
-                <path d="M10 20 C10 10, 25 10, 20 30 C15 45, -5 30, 10 20 Z" fill="#E91E63" transform="scale(0.8) translate(100, -10)" class="animate-bounce"/>
-            </svg>`
+            crying: `<svg class="w-full h-full" viewBox="0 0 100 100"><ellipse cx="50" cy="55" rx="45" ry="38" fill="#FFF" stroke="#E91E63" stroke-width="3"/><polygon points="12,35 15,5 38,25" fill="#FFF" stroke="#E91E63" stroke-width="3"/><polygon points="88,35 85,5 62,25" fill="#FFF" stroke="#E91E63" stroke-width="3"/><ellipse cx="32" cy="55" rx="9" ry="12" fill="#C2185B"/><ellipse cx="68" cy="55" rx="9" ry="12" fill="#C2185B"/><path d="M 45 72 Q 50 68 55 72" fill="none" stroke="#C2185B" stroke-width="3" stroke-linecap="round"/></svg>`,
+            unimpressed: `<svg class="w-full h-full" viewBox="0 0 100 100"><ellipse cx="50" cy="55" rx="45" ry="38" fill="#FFF" stroke="#E91E63" stroke-width="3"/><polygon points="12,35 15,5 38,25" fill="#FFF" stroke="#E91E63" stroke-width="3"/><polygon points="88,35 85,5 62,25" fill="#FFF" stroke="#E91E63" stroke-width="3"/><line x1="25" y1="58" x2="39" y2="58" stroke="#C2185B" stroke-width="4" stroke-linecap="round"/><line x1="61" y1="58" x2="75" y2="58" stroke="#C2185B" stroke-width="4" stroke-linecap="round"/><line x1="46" y1="72" x2="54" y2="72" stroke="#C2185B" stroke-width="3" stroke-linecap="round"/></svg>`,
+            happy: `<svg class="w-full h-full" viewBox="0 0 100 100"><ellipse cx="50" cy="55" rx="45" ry="38" fill="#FFF" stroke="#E91E63" stroke-width="3"/><polygon points="12,35 15,5 38,25" fill="#FFF" stroke="#E91E63" stroke-width="3"/><polygon points="88,35 85,5 62,25" fill="#FFF" stroke="#E91E63" stroke-width="3"/><path d="M 25 55 Q 32 42 39 55" fill="none" stroke="#C2185B" stroke-width="5" stroke-linecap="round"/><path d="M 61 55 Q 68 42 75 55" fill="none" stroke="#C2185B" stroke-width="5" stroke-linecap="round"/><path d="M 40 68 Q 50 90 60 68 Z" fill="#E91E63"/></svg>`
         };
 
         const gaugeSvg = document.getElementById('gauge-svg');
@@ -672,24 +476,18 @@
         let isDragging = false;
         let currentPercent = 0;
 
-        // Initialize Avatar
         catAvatar.innerHTML = cats.crying;
 
-        // Pointer Events for dragging the needle directly
         needleHitbox.addEventListener('pointerdown', startDrag);
-        
-        // Attach move/up to window so dragging works even if cursor leaves the exact SVG path
         window.addEventListener('pointermove', onDrag);
         window.addEventListener('pointerup', endDrag);
 
         function startDrag(e) {
             if (isSequenceActive) return;
             isDragging = true;
-            tooltip.style.opacity = '0'; // Hide tooltip once interaction starts
-            needleGroup.style.transition = 'none'; // Snap instantly to pointer
+            tooltip.style.opacity = '0';
+            needleGroup.style.transition = 'none';
             updateNeedlePosition(e);
-            
-            // Prevent default touch actions like scrolling
             if(e.cancelable) e.preventDefault();
         }
 
@@ -701,9 +499,7 @@
         function endDrag(e) {
             if (!isDragging) return;
             isDragging = false;
-            needleGroup.style.transition = 'transform 0.1s ease-out'; // Smooth release
-            
-            // If they reached exactly 100%, trigger the win sequence
+            needleGroup.style.transition = 'transform 0.1s ease-out';
             if (currentPercent === 100 && !isSequenceActive) {
                 isSequenceActive = true;
                 startFinalSequence();
@@ -711,57 +507,32 @@
         }
 
         function updateNeedlePosition(e) {
-            // Get accurate bounding box of the SVG element
             const rect = gaugeSvg.getBoundingClientRect();
+            const pivotXScreen = rect.left + (rect.width / 2);
+            const pivotYScreen = rect.top + (rect.height * (100 / 110));
             
-            // The SVG viewBox is 200x110. The pivot center of the needle is at (100, 100) in SVG coordinates.
-            // Map the SVG (100,100) to actual screen coordinates.
-            const pivotXScreen = rect.left + (rect.width / 2); // 100 is exactly middle of 200 width
-            const pivotYScreen = rect.top + (rect.height * (100 / 110)); // 100 out of 110 height
-            
-            // Get client coords (handle touch vs mouse implicitly via pointer events)
-            const clientX = e.clientX;
-            const clientY = e.clientY;
-
-            // Calculate angle using Math.atan2
-            // atan2 gives angle from X-axis. 
-            // In our screen coords: Right is 0, Bottom is 90, Top is -90, Left is +/-180.
-            let angleRad = Math.atan2(clientY - pivotYScreen, clientX - pivotXScreen);
+            let angleRad = Math.atan2(e.clientY - pivotYScreen, e.clientX - pivotXScreen);
             let angleDeg = angleRad * (180 / Math.PI);
 
-            // Our valid arc is the top half: Left (-180) to Right (0).
-            // Clamp the values to prevent needle from going below the gauge.
-            if (angleDeg > 0 && angleDeg <= 90) angleDeg = 0; // Clamped to 100% (Right)
-            if (angleDeg > 90 || angleDeg < -180) angleDeg = -180; // Clamped to 0% (Left)
+            if (angleDeg > 0 && angleDeg <= 90) angleDeg = 0;
+            if (angleDeg > 90 || angleDeg < -180) angleDeg = -180;
 
-            // Convert angle (-180 to 0) to percentage (0% to 100%)
             let percent = Math.round(((angleDeg + 180) / 180) * 100);
             percent = Math.max(0, Math.min(100, percent));
             currentPercent = percent;
 
-            // Apply visual rotation to the needle.
-            // In SVG transform rotate space, if the needle is drawn pointing UP (which it is internally via M -5 0 L 1 -75 etc)
-            // Left is -90deg rotation. Right is +90deg rotation. 
-            // -180 angle -> -90 rot. 0 angle -> +90 rot. Formula: angleDeg + 90
-            const visualRotation = angleDeg + 90;
-            needleGroup.setAttribute('transform', `translate(100, 100) rotate(${visualRotation})`);
-            
+            needleGroup.setAttribute('transform', `translate(100, 100) rotate(${angleDeg + 90})`);
             updateUI(percent);
         }
 
         function updateUI(val) {
             percentageDisplay.innerText = `${val}%`;
-
             if (val <= 40) {
-                if (reactionText.innerText !== "Only that much?") {
-                    reactionText.innerText = "Only that much?";
-                    catAvatar.innerHTML = cats.crying;
-                }
+                reactionText.innerText = "Only that much?";
+                catAvatar.innerHTML = cats.crying;
             } else if (val < 100) {
-                if (reactionText.innerText !== "Half? Seriously?") {
-                    reactionText.innerText = "Half? Seriously?";
-                    catAvatar.innerHTML = cats.unimpressed;
-                }
+                reactionText.innerText = "Half? Seriously?";
+                catAvatar.innerHTML = cats.unimpressed;
             }
         }
 
@@ -769,35 +540,24 @@
             reactionText.innerText = "Correct answer!";
             catAvatar.innerHTML = cats.happy;
             catAvatar.classList.add('animate-bounce');
-            
-            needleGroup.setAttribute('transform', `translate(100, 100) rotate(90)`); // Lock at right
+            needleGroup.setAttribute('transform', `translate(100, 100) rotate(90)`);
 
             setTimeout(() => {
                 percentageDisplay.innerText = "500%";
-                percentageDisplay.classList.add('scale-125', 'text-app-pink-dark');
-                
                 setTimeout(() => {
                     percentageDisplay.innerText = "1000%";
-                    percentageDisplay.classList.add('scale-150');
-                    
                     setTimeout(() => {
                         percentageDisplay.innerText = "Infinite %";
-                        percentageDisplay.classList.remove('scale-150');
-                        percentageDisplay.classList.add('scale-110', 'text-app-pink', 'drop-shadow-md');
-                        
-                        // Show Next Button
                         nextBtnScreen1.classList.remove('hidden');
                         setTimeout(() => {
                             nextBtnScreen1.classList.remove('opacity-0', 'translate-x-4');
                         }, 50);
-
                     }, 1000);
                 }, 1000);
             }, 1000);
         }
 
         function showSection(sectionId) {
-            // Hide all sections
             const sections = ['screen-1', 'screen-2', 'gift-1', 'gift-2', 'gift-3'];
             sections.forEach(id => {
                 const el = document.getElementById(id);
@@ -811,20 +571,16 @@
             });
         }
 
-        // Music Player visual toggle
         let isPlayingAudio = false;
         function toggleAudio() {
             const icon = document.getElementById('play-icon');
             const btn = document.getElementById('play-btn');
             isPlayingAudio = !isPlayingAudio;
-            
             if (isPlayingAudio) {
-                icon.classList.remove('fa-play');
-                icon.classList.add('fa-pause');
+                icon.classList.replace('fa-play', 'fa-pause');
                 btn.classList.add('animate-pulse-glow');
             } else {
-                icon.classList.remove('fa-pause');
-                icon.classList.add('fa-play');
+                icon.classList.replace('fa-pause', 'fa-play');
                 btn.classList.remove('animate-pulse-glow');
             }
         }
